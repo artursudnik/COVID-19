@@ -14,5 +14,9 @@
   "bugs": {
     "url": "https://github.com/artursudnik/COVID-19/issues"
   },
-  "homepage": "https://github.com/artursudnik/COVID-19#readme"
+  "homepage": "https://github.com/artursudnik/COVID-19#readme",
+  "dependencies": {
+    "csv-parser": "2.3.2",
+    "moment": "2.24.0"
+  }
 }
