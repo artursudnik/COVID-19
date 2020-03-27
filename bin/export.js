@@ -5,7 +5,7 @@ const csvParser = require('csv-parser'),
       fsp       = fs.promises,
       moment    = require('moment');
 
-process.chdir('..');
+process.chdir(require('path').join(__dirname, '..'));
 
 const outStream = fs.createWriteStream('csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global-normalized.json').on('error', (err) => console.error(err));
 
