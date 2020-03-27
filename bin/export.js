@@ -1,9 +1,9 @@
 "use strict";
 
-const csvParser    = require('csv-parser'),
-      fs           = require('fs'),
-      fsp          = fs.promises,
-      moment       = require('moment');
+const csvParser = require('csv-parser'),
+      fs        = require('fs'),
+      fsp       = fs.promises,
+      moment    = require('moment');
 
 process.chdir('..');
 
@@ -16,7 +16,9 @@ fs.createReadStream('csse_covid_19_data/csse_covid_19_time_series/time_series_co
     .pipe(csvParser())
     .on('data', (data) => {
         const provState     = data['Province/State'],
-              countryRegion = data['Country/Region'];
+              countryRegion = data['Country/Region'],
+              lat           = parseFloat(data['Lat']),
+              long          = parseFloat(data['Long']);
 
         const timeSeriesData = Object.keys(data)
             .filter(fieldName => fieldName.match(/\d{1,2}\/\d{1,2}\/\d{1,2}/))
@@ -29,6 +31,8 @@ fs.createReadStream('csse_covid_19_data/csse_covid_19_time_series/time_series_co
             outStream.write(JSON.stringify({
                 provState,
                 countryRegion,
+                lat,
+                long,
                 ...dataPoint
             }) + '\n')
         })
