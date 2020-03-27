@@ -24,7 +24,7 @@ fs.createReadStream('csse_covid_19_data/csse_covid_19_time_series/time_series_co
             .filter(fieldName => fieldName.match(/\d{1,2}\/\d{1,2}\/\d{1,2}/))
             .map(dateFieldName => ({
                 date : moment(dateFieldName, 'M/D/YY').format('YYYY-MM-DD'),
-                count: data[dateFieldName]
+                count: parseInt(data[dateFieldName])
             }));
 
         timeSeriesData.forEach(dataPoint => {
